@@ -7,8 +7,10 @@ mkdir out #only if it doesn't exist
 make O=out REAL_CC=$QCOMCLANG8/clang CLANG_TRIPLE=aarch64-linux-gnu- cepheus_user_defconfig
 # To not modify the cepheus_user_defconfig with the CONFIG_BUILD_ARM64_DT_OVERLAY=y required, edit the generated .config file directly
 #./scripts/config --file out/.config --enable CONFIG_BUILD_ARM64_DT_OVERLAY
-# To not modify the cepheus_user_defconfig with the Cosmin demonsingur@gmail.com http://demon000.github.io CONFIG_MODULE_FORCE_LOAD - also need his module.c to force Wifi and Sound drivers to work.  It's in the desktop folder Mi9 Build Tools if you lose it: cosmin_kernel-module.c - copy to \kernel\module.c
+# To not modify the cepheus_user_defconfig with the Cosmin demonsingur@gmail.com http://demon000.github.io CONFIG_MODULE_FORCE_LOAD for Wifi and Sound to work
 #./scripts/config --file out/.config --enable CONFIG_MODULE_FORCE_LOAD
+# The above requires his modified module.c to work if not building from my repo.  It's in the desktop folder Mi9 Build Tools if you lose it or it gets changed: cosmin_kernel-module.c - copy to \kernel\module.c
+# File from GitHub Demon000: https://github.com/Demon000/kernel_xiaomi_sm8150/blob/998515ef8c39f2ecf89d54d2711d7d934b6519d1/kernel/module.c
 # build from the config file, -j4 is 4 processors (my VM, can set higher based on machine)
 make -j4 O=out REAL_CC=$QCOMCLANG8/clang CLANG_TRIPLE=aarch64-linux-gnu- 2>&1 | tee kernel.log
 # make dtbo.img directly from the built dtbo files, can flash in TWRP directly
