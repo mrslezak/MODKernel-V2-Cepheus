@@ -1,4 +1,4 @@
-# MODKernelBeta-Cepheus
+# MODKernel-V2-Cepheus
 Modified XDA original MOD Kernel https://github.com/mrslezak/Xiaomi_Kernel_OpenSource -b cepheus-p-oss with a higher regulator on GPU830 for greater stability, it can now run 3DMark and other extremely demanding applications without lag (provided memory is sufficient, ZRAM at 2GB LZ4 for 6GB Mi9 versions suggested for 3DMark).  Added BOEFFLA Wakelock Blocker 1.1.0 by andip71, following the files listed here: https://gitlab.e.foundation/search?utf8=%E2%9C%93&search=BOEFFLA&group_id=&project_id=295&search_code=true&repository_ref=; Change drivers/base/power/Makefile; Add boeffla_wl_blocker.c and .h in /drivers/base/power/, edit main.c, edit wakeup.c, add config for BOEFFLA_WL_BLOCKER in kernel/power/Kconfig; add to defconfig CONFIG_BOEFFLA_WL_BLOCKER (enable).  Most files are in /kernel/power/ except defconfig arch/arm64/cepheus-def-config.  Evira kernel copied MOD Kernel original repo so files can be likely all copied from https://github.com/EviraKernel/Officialmi9/tree/Evira/ if needed for Xiaomi 855 changes, although only 1 or 2 were here.  Added Dynamic Fsync which is developed by Paul Reioux aka Faux123 <reioux@gmail.com> in all implementations with 1 update for SDM845 pulled from https://github.com/pappschlumpf/SmurfKernelOP7.  Kernel is likely the final build with performance where it stands.
 
 M.O.D. Kernel - Mi9
@@ -13,7 +13,7 @@ This also has several additional features over the stock implementation.  Note i
 be compiled from source 2) packed into an existing boot.img - the easiest way is to use Android Image Kitchen available on XDA
 3) flashed to the device 4) patched with Magisk 5) a kernel manager which supports the added functions must be installed 
 (APK for SmartPack or Google PlayStore for EX Kernel Manager or FK Kernel Manager) and the settings must be turned ON. There is
-also a Magisk Module on XDA that will setup the optimal parameters other than the GPU OC.  It has this repo prebuilt:
+also a Magisk Module here that will setup the optimal parameters or a battery saver mode.  It has this repo prebuilt:
 https://forum.xda-developers.com/Mi-9/development/m-o-d-kernel-mi-9-android-9-pie-t3960271
 
 1) Fsync toggle - enable / disable.  This an be set with any Kernel manager - SmartPack is a good free one although I use
@@ -51,7 +51,7 @@ by booting into Fastboot (volume down + power button buttons), then install via:
 twrp-3.3.1-41-cepheus-mauronofrio.img *** NOTE THE fstab.qcom FILE IN THIS REPO MUST BE IN /vendor/etc/ OR YOUR PHONE WILL NOT BE 
 ABLE TO MOUNT THE DATA PARTITION!!!! *** So your next step is to copy the fstab.qcom via a root browser or from recovery:
 adb push fstab.qcom /vendor/etc/fstab.qcom while in TWRP with Mount- Vendor (volume up + power buttons, release power when the Logo 
-shows on the screen).  The XDA post mentioned earlier has TWRP flashable zip files that automatically do this for you.
+shows on the screen).  The XDA post mentioned earlier has TWRP flashable zip files that automatically do this for you, also in this repo.
 
 Flash this kernel and you can also flash the dtbo.img.  This can be created by downloading and installing this
 https://android.googlesource.com/platform/system/libufdt/+/master/utils/ download the .tgz file, extract and from the src directory,
